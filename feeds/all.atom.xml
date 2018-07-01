@@ -7,4 +7,18 @@
 &lt;p&gt;Oh my. I hadn't been on twitter for some time but just a quick dose helps me to realize that it's interesting to recognize your past vices and interests but that it's important to trim the fat to meet your current needs.&lt;/p&gt;
 &lt;h3&gt;Pelican&lt;/h3&gt;
 &lt;p&gt;I know that I want to create a site but I want to do it on the cheap as much as possible. A friend has been working through a Pelican static site hosted on github and I think that is going to be the best option. There are a lot of things to figure out about this.&lt;/p&gt;
-&lt;p&gt;I came across a decent article/tutorial &lt;a href="https://appliedcaffeine.org/navbaritems.html" title="Applied Caffeine - Pelican navbar menu items"&gt;here&lt;/a&gt; regarding the implementation of custom menu items in the navigation bar and that lead me to initial adopting the &lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" title="bootstrap3 on github"&gt;bootstrap3&lt;/a&gt; theme as a starting point for the site.&lt;/p&gt;</content><category term="process"></category><category term="approach"></category><category term="writing"></category></entry></feed>
+&lt;p&gt;I came across a decent article/tutorial &lt;a href="https://appliedcaffeine.org/navbaritems.html" title="Applied Caffeine - Pelican navbar menu items"&gt;here&lt;/a&gt; regarding the implementation of custom menu items in the navigation bar and that lead me to initial adopting the &lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" title="bootstrap3 on github"&gt;bootstrap3&lt;/a&gt; theme as a starting point for the site.&lt;/p&gt;
+&lt;h4&gt;References that really helped me&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://habeebq.github.io/customizing-the-blog.html"&gt;habeebq - Customizing the blog&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3"&gt;bootstrap3 pelican repo readme on github&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican-themes/blob/master/pelican-bootstrap3/EXAMPLES.md"&gt;bootstrap3 pelican repo Examples in the Wild on github&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://fontawesome.com/"&gt;fontawesome icon directory to know the right name&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://appliedcaffeine.org/navbaritems.html"&gt;applied caffeine - Pelican navbar menu items&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;the entire pelican documentation&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;And heavily stalking these two repositories&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://github.com/NapsterInBlue/MoviesMetricsMusings"&gt;NapsterInBlue&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/jakevdp/jakevdp.github.io-source"&gt;jakevdp&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="process"></category><category term="approach"></category><category term="writing"></category></entry></feed>
