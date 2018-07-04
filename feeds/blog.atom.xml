@@ -1,30 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Stuart M. Davis - Polymath - Blog</title><link href="http://www.polymathist.me/" rel="alternate"></link><link href="http://www.polymathist.me/feeds/blog.atom.xml" rel="self"></link><id>http://www.polymathist.me/</id><updated>2018-06-29T22:00:00-04:00</updated><entry><title>Rebuilding My Web Presence</title><link href="http://www.polymathist.me/blog/2018/06/29/rebuilding-web-presence/" rel="alternate"></link><published>2018-06-29T22:00:00-04:00</published><updated>2018-06-29T22:00:00-04:00</updated><author><name>Stuart Davis</name></author><id>tag:www.polymathist.me,2018-06-29:/blog/2018/06/29/rebuilding-web-presence/</id><summary type="html">
 
-&lt;p&gt;I just took a stroll through the &lt;a href="https://web.archive.org/"&gt;wayback machine&lt;/a&gt; to get a sense at how long I've been at this from a website perspective. As far as I can tell one of main properties was stood up around 2002 where I used a cutting edge flash animation as my main navigation feature. The next major revamp after that included an archive of various doodles and a decent set of reviews regarding the cigars that I had endured. More on that some other time.
+&lt;p&gt;I just took a stroll through the &lt;a href="https://web.archive.org/"&gt;wayback machine&lt;/a&gt; to get a sense at how long I've been at this from a website perspective. As far as I can tell one of main properties was stood up around 2002 where I used a cutting edge flash animation as my main navigation feature. The next major revamp after that included an archive of various doodles and a decent set of reviews regarding the cigars that I had endured. More on that some other time.&lt;/p&gt;
+&lt;p&gt;I didn't stop with the one site as I felt the need to maintain different levels of decorum on different properties. My mind was constantly bouncing around between a blog filled with personal rants on the universe, a site dedicated to pursuing enhanced levels of business acumen, a collaboration focused on classical music, and so on and so forth. Sites popped up around me with the hope that could regularly rotate through the media empire.&lt;/p&gt;
+&lt;p&gt;Alas... my focus shifted
 </summary><content type="html">&lt;h2&gt;Wayback and back again&lt;/h2&gt;
 
 
-&lt;p&gt;I just took a stroll through the &lt;a href="https://web.archive.org/"&gt;wayback machine&lt;/a&gt; to get a sense at how long I've been at this from a website perspective. As far as I can tell one of main properties was stood up around 2002 where I used a cutting edge flash animation as my main navigation feature. The next major revamp after that included an archive of various doodles and a decent set of reviews regarding the cigars that I had endured. More on that some other time.
- &lt;/p&gt;
+&lt;p&gt;I just took a stroll through the &lt;a href="https://web.archive.org/"&gt;wayback machine&lt;/a&gt; to get a sense at how long I've been at this from a website perspective. As far as I can tell one of main properties was stood up around 2002 where I used a cutting edge flash animation as my main navigation feature. The next major revamp after that included an archive of various doodles and a decent set of reviews regarding the cigars that I had endured. More on that some other time.&lt;/p&gt;
 &lt;p&gt;I didn't stop with the one site as I felt the need to maintain different levels of decorum on different properties. My mind was constantly bouncing around between a blog filled with personal rants on the universe, a site dedicated to pursuing enhanced levels of business acumen, a collaboration focused on classical music, and so on and so forth. Sites popped up around me with the hope that could regularly rotate through the media empire.&lt;/p&gt;
-&lt;p&gt;Alas... my focus shifted&lt;/p&gt;
+&lt;p&gt;Alas... my focus shifted
+ &lt;/p&gt;
+&lt;h2&gt;I have things to say&lt;/h2&gt;
+&lt;p&gt;Not that anyone really cares. Perhaps you do or will over time. But I think I have quite a few different things to say and share about a lot of different topics. I would hope that over time, the list of tags grows and the value that one can garner from them is palpable. But in order to get there I realize that I need to regain a foothold and develop a better process around maintaining an appropriate presence.&lt;/p&gt;
 &lt;h3&gt;Twitter&lt;/h3&gt;
-&lt;p&gt;Oh my. I hadn't been on twitter for some time but just a quick dose helps me to realize that it's interesting to recognize your past vices and interests but that it's important to trim the fat to meet your current needs.&lt;/p&gt;
-&lt;h3&gt;Pelican&lt;/h3&gt;
-&lt;p&gt;I know that I want to create a site but I want to do it on the cheap as much as possible. A friend has been working through a Pelican static site hosted on github and I think that is going to be the best option. There are a lot of things to figure out about this.&lt;/p&gt;
-&lt;p&gt;I came across a decent article/tutorial &lt;a href="https://appliedcaffeine.org/navbaritems.html" title="Applied Caffeine - Pelican navbar menu items"&gt;here&lt;/a&gt; regarding the implementation of custom menu items in the navigation bar and that lead me to initial adopting the &lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" title="bootstrap3 on github"&gt;bootstrap3&lt;/a&gt; theme as a starting point for the site.&lt;/p&gt;
+&lt;p&gt;Oh my. I hadn't been on twitter for some time but just a quick dose helps me to realize that it's interesting to recognize your past vices and interests but that it's important to trim the fat to meet your current needs. Looking at the list of those I was "following" was enlightening and I began to realize that a regular pruning is likely healthy. So I took a bit of time and scrolled through and started to remove some old accounts, many of which seemed ill-maintained anyway.&lt;/p&gt;
+&lt;p&gt;That and some thoughtful time spent reading the feed reminded me that there is indeed some good content being shared in the twitter-verse as well as other locations. As I get deeper into things I'll have to look for the appropriate environment in which to bring all of my feeds together so that I can stay up-to-date efficiently.&lt;/p&gt;
+&lt;h3&gt;My Website&lt;/h3&gt;
+&lt;p&gt;I know that I wanted to create a site but I want to do it on the cheap as much as possible. In the past, I had spent too much money for a resellers hosting account just so that I could maintain all of my properties. A friend has been working through a Pelican static site hosted on github and I think that is turning out to be the best option. There are a lot of things to figure out and tweak but the process is giving me som&lt;/p&gt;
+&lt;p&gt;I came across a decent article/tutorial &lt;a href="https://appliedcaffeine.org/navbaritems.html" title="Applied Caffeine - Pelican navbar menu items"&gt;here&lt;/a&gt; regarding the implementation of custom menu items in the navigation bar and that lead me to initially adopt the &lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" title="bootstrap3 on github"&gt;bootstrap3&lt;/a&gt; theme as a starting point for the site.&lt;/p&gt;
 &lt;h4&gt;References that really helped me&lt;/h4&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://habeebq.github.io/customizing-the-blog.html"&gt;habeebq - Customizing the blog&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3"&gt;bootstrap3 pelican repo readme on github&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican-themes/blob/master/pelican-bootstrap3/EXAMPLES.md"&gt;bootstrap3 pelican repo Examples in the Wild on github&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="http://habeebq.github.io/customizing-the-blog.html"&gt;habeebq.github.io - "Customizing the blog"&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3"&gt;bootstrap3 pelican repo "readme" on github&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican-themes/blob/master/pelican-bootstrap3/EXAMPLES.md"&gt;bootstrap3 pelican repo "Examples in the Wild" on github&lt;/a&gt;  &lt;/li&gt;
 &lt;li&gt;&lt;a href="https://fontawesome.com/"&gt;fontawesome icon directory to know the right name&lt;/a&gt;  &lt;/li&gt;
 &lt;li&gt;&lt;a href="https://appliedcaffeine.org/navbaritems.html"&gt;applied caffeine - Pelican navbar menu items&lt;/a&gt;  &lt;/li&gt;
-&lt;li&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;the entire pelican documentation&lt;/a&gt;  &lt;/li&gt;
+&lt;li&gt;&lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;the entire pelican documentation&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://github.com/getpelican/pelican/wiki/Tips-n-Tricks"&gt;pelican tips and tricks wiki&lt;/a&gt;  &lt;/li&gt;
 &lt;li&gt;And heavily stalking these two repositories&lt;ul&gt;
 &lt;li&gt;&lt;a href="https://github.com/NapsterInBlue/MoviesMetricsMusings"&gt;NapsterInBlue&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://github.com/jakevdp/jakevdp.github.io-source"&gt;jakevdp&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;</content><category term="process"></category><category term="approach"></category><category term="writing"></category></entry></feed>
+&lt;/ul&gt;
+&lt;p&gt;So now I've got things up and running. If I get the chance I'll have to piece together my process of getting the site up and running. I had to do a lot of Googling for answers that I didn't find expressly clear in various documentations.&lt;/p&gt;
+&lt;h3&gt;Onward&lt;/h3&gt;
+&lt;p&gt;With an environment in place, and a renewed energy to maintain and voice and a presence. I am truly looking forward to adding value where I can... or at least my opinion - the value of which may be in question depending on your perspective. Regardless, can't wait to have meaningful conversations!&lt;/p&gt;
+&lt;p&gt;Regards,
+Stuart&lt;/p&gt;</content><category term="process"></category><category term="approach"></category><category term="writing"></category></entry></feed>
