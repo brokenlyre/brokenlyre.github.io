@@ -118,11 +118,11 @@ Stuart M. Davis - Polymath            </a>
                 </div>
                 <h2>Let's roll out!</h2>
 <p>
-I had already mentioned <a href="./rebuilding-web-presence.html">here</a> that I would write about the process of rolling out this website via <a href="(https://blog.getpelican.com/)">Pelican</a> and <a href="(https://pages.github.com/)">github pages</a>. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
+I had already mentioned <a href="./rebuilding-web-presence.html">here</a> that I would write about the process of rolling out this website via <a href="https://blog.getpelican.com/">Pelican</a> and <a href="https://pages.github.com/">github pages</a>. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
 </p>
 <h2>Get Pelican</h2>
-<p>Well... I suppose that's a couple of stages down the road. First thing to realize is that Pelican is a Python solution and as such you will need a python environment. That's fairly easily accomplished by grabbing the latest distribution from <a href="(https://www.anaconda.com/download/)">anaconda</a>. You will also need a github account and will need to download and install <a href="(https://git-scm.com/downloads)">git</a>.</p>
-<p>Now here's where I'm going to mess things up quite a bit because it's a part that I'm not really wanting to replicate as I already have my environment installed. But I can summarize a few things that you will readily find at the <a href="(https://blog.getpelican.com/)">Pelican</a> reference documentation. But once Python is installed, open up the anaconda prompt and fire off the following command:</p>
+<p>Well... I suppose that's a couple of stages down the road. First thing to realize is that Pelican is a Python solution and as such you will need a python environment. That's fairly easily accomplished by grabbing the latest distribution from <a href="https://www.anaconda.com/download/">anaconda</a>. You will also need a github account and will need to download and install <a href="https://git-scm.com/downloads">git</a>.</p>
+<p>Now here's where I'm going to mess things up quite a bit because it's a part that I'm not really wanting to replicate as I already have my environment installed. But I can summarize a few things that you will readily find at the <a href="https://blog.getpelican.com/">Pelican</a> reference documentation. But once Python is installed, open up the anaconda prompt and fire off the following command:</p>
 <div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
 </pre></div>
 
@@ -142,7 +142,7 @@ I had already mentioned <a href="./rebuilding-web-presence.html">here</a> that I
 </pre></div>
 
 
-<p>There's a lot to consider with the quickstart. A lot of options you can just accept as default but you absolutely need to pay attention to the deployment options. Many of the items are editable after the fact in the <code>pelicanconf.py</code> and <code>publishconf.py</code>. Additional considerations evolve around generation and deployment through either Fabric or Make. As such there will be items that are configurable in <code>fabfile.py</code> or <code>Makefile</code> respectively. I say all that to say this... please be sure to reference the <a href="(http://docs.getpelican.com/en/stable/index.html)">Pelican documentation</a> a lot and many times over. A lot of it didn't sink in the first time through.</p>
+<p>There's a lot to consider with the quickstart. A lot of options you can just accept as default but you absolutely need to pay attention to the deployment options. Many of the items are editable after the fact in the <code>pelicanconf.py</code> and <code>publishconf.py</code>. Additional considerations evolve around generation and deployment through either Fabric or Make. As such there will be items that are configurable in <code>fabfile.py</code> or <code>Makefile</code> respectively. I say all that to say this... please be sure to reference the <a href="http://docs.getpelican.com/en/stable/index.html">Pelican documentation</a> a lot and many times over. A lot of it didn't sink in the first time through.</p>
 <h2>My process</h2>
 <p>In anaconda I navigated to my project directory then made a file to house my documents</p>
 <div class="highlight"><pre><span></span>mkdir /path/to/repo-name
@@ -270,7 +270,7 @@ site-name.com
 </table>
 <p>Even if this is a project site, just put in the <code>username.github.io</code> version and don't attempt to add a directory in line. You can then head to your website url and see how fast the dns updates. In my case the updates took a couple of hours. So don't sweat it if the site doesn't load right away.</p>
 <h2>And..... go</h2>
-<p>Hopefully this ~~gits~~ gets you to a good spot with setting up a static site. I'm sure I've missed a thing here and there. Feel free to offer a correction on my <a href="https://github.com/brokenlyre/Polymathist.me/issues">issues page</a> if you do see anything grossly out of order.</p>
+<p>Hopefully this gets you to a good spot with setting up a static site. I'm sure I've missed a thing here and there. Feel free to offer a correction on my <a href="https://github.com/brokenlyre/Polymathist.me/issues">issues page</a> if you do see anything grossly out of order.</p>
 <p>Regards,<br>
 Stuart</p>
             </div>
@@ -318,10 +318,7 @@ Stuart</p>
       <a href="http://www.polymathist.me/tag/pelican.html">pelican</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="http://www.polymathist.me/tag/website.html">website</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.polymathist.me/tag/developing.html">developing</a>
+      <a href="http://www.polymathist.me/tag/git.html">git</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://www.polymathist.me/tag/gtd.html">gtd</a>
@@ -333,13 +330,16 @@ Stuart</p>
       <a href="http://www.polymathist.me/tag/creating.html">creating</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="http://www.polymathist.me/tag/approach.html">approach</a>
-    </li>
-    <li class="list-group-item tag-4">
       <a href="http://www.polymathist.me/tag/organizing.html">organizing</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="http://www.polymathist.me/tag/git.html">git</a>
+      <a href="http://www.polymathist.me/tag/website.html">website</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/developing.html">developing</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/approach.html">approach</a>
     </li>
   </ul>
 </li>
