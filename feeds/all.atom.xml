@@ -1,5 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Stuart M. Davis - Polymath</title><link href="http://www.polymathist.me/" rel="alternate"></link><link href="http://www.polymathist.me/feeds/all.atom.xml" rel="self"></link><id>http://www.polymathist.me/</id><updated>2018-07-04T21:00:00-04:00</updated><entry><title>What I Need in my Organizational Life</title><link href="http://www.polymathist.me/blog/2018/07/04/need-organization-life/" rel="alternate"></link><published>2018-07-04T21:00:00-04:00</published><updated>2018-07-04T21:00:00-04:00</updated><author><name>Stuart Davis</name></author><id>tag:www.polymathist.me,2018-07-04:/blog/2018/07/04/need-organization-life/</id><summary type="html">
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Stuart M. Davis - Polymath</title><link href="http://www.polymathist.me/" rel="alternate"></link><link href="http://www.polymathist.me/feeds/all.atom.xml" rel="self"></link><id>http://www.polymathist.me/</id><updated>2018-07-23T16:00:00-04:00</updated><entry><title>Implementing Pelican</title><link href="http://www.polymathist.me/blog/2018/07/23/implementing-pelican/" rel="alternate"></link><published>2018-07-23T16:00:00-04:00</published><updated>2018-07-23T16:00:00-04:00</updated><author><name>Stuart Davis</name></author><id>tag:www.polymathist.me,2018-07-23:/blog/2018/07/23/implementing-pelican/</id><summary type="html">
+I had already mentioned &lt;a href="./rebuilding-web-presence.html"&gt;here&lt;/a&gt; that I would write about the process of rolling out this website via &lt;a href="(https://blog.getpelican.com/)"&gt;Pelican&lt;/a&gt; and &lt;a href="(https://pages.github.com/)"&gt;github pages&lt;/a&gt;. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
+</summary><content type="html">&lt;h2&gt;Let's roll out!&lt;/h2&gt;
+&lt;p&gt;
+I had already mentioned &lt;a href="./rebuilding-web-presence.html"&gt;here&lt;/a&gt; that I would write about the process of rolling out this website via &lt;a href="(https://blog.getpelican.com/)"&gt;Pelican&lt;/a&gt; and &lt;a href="(https://pages.github.com/)"&gt;github pages&lt;/a&gt;. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
+&lt;/p&gt;
+&lt;h2&gt;Get Pelican&lt;/h2&gt;
+&lt;p&gt;Well... I suppose that's a couple of stages down the road. First thing to realize is that Pelican is a Python solution and as such you will need a python environment. That's fairly easily accomplished by grabbing the latest distribution from &lt;a href="(https://www.anaconda.com/download/)"&gt;anaconda&lt;/a&gt;. You will also need a github account and will need to download and install &lt;a href="(https://git-scm.com/downloads)"&gt;git&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Now here's where I'm going to mess things up quite a bit because it's a part that I'm not really wanting to replicate as I already have my environment installed. But I can summarize a few things that you will readily find at the &lt;a href="(https://blog.getpelican.com/)"&gt;Pelican&lt;/a&gt; reference documentation. But once Python is installed, open up the anaconda prompt and fire off the following command:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Pelican will get you running out of the gate with reStructureText but as I was simply looking for ease of typing I decided that I wanted to opt for Markdown and as such need the following:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Markdown&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;As with almost any python install, It's good to ensure that you have the real latest version which may not actually be what came through pip. So...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="n"&gt;upgrade&lt;/span&gt; &lt;span class="n"&gt;pelican&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now you're pretty much ready to kick start a project. I navigated to an appropriate place to manage my repository for the source files for this project. In some cases you many need to make a folder and then head into it. Regardless, once you're in that base directory kick of the process with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There's a lot to consider with the quickstart. A lot of options you can just accept as default but you absolutely need to pay attention to the deployment options. Many of the items are editable after the fact in the &lt;code&gt;pelicanconf.py&lt;/code&gt; and &lt;code&gt;publishconf.py&lt;/code&gt;. Additional considerations evolve around generation and deployment through either Fabric or Make. As such there will be items that are configurable in &lt;code&gt;fabfile.py&lt;/code&gt; or &lt;code&gt;Makefile&lt;/code&gt; respectively. I say all that to say this... please be sure to reference the &lt;a href="(http://docs.getpelican.com/en/stable/index.html)"&gt;Pelican documentation&lt;/a&gt; a lot and many times over. A lot of it didn't sink in the first time through.&lt;/p&gt;
+&lt;h2&gt;My process&lt;/h2&gt;
+&lt;p&gt;In anaconda I navigated to my project directory then made a file to house my documents&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir /path/to/repo-name
+&lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In git I navigated to the folder and then initialized a repository&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
+git init
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In github I created a repository for these source files to reside in the master branch with the intention that the published information will land in the gh-pages branch. So in my local directory I simply create a &lt;code&gt;Readme.md&lt;/code&gt; file that I will be able to push to the blank repository in github. Then I used the next commands to create a gh-pages branch&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
+git symbolic-ref HEAD refs/heads/gh-pages
+rm .git/index
+git clean -fdx
+&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;My GitHub Page&amp;quot;&lt;/span&gt; &amp;gt; index.html
+git add .
+git commit -a -m &lt;span class="s2"&gt;&amp;quot;First pages commit&amp;quot;&lt;/span&gt;
+git push origin gh-pages
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This ensures that there is a gh-pages branch to which we will publish our site documents and host the site files.&lt;/p&gt;
+&lt;p&gt;Now we need to switch back to the master branch and start up pelican&lt;/p&gt;
+&lt;p&gt;In git bash&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git checkout master
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;In anaconda&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pelican&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;quickstart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;create in root &lt;code&gt;.&lt;/code&gt;&lt;br&gt;
+if you aren't in the root directory of your repo you can point it where you need it to go.  &lt;/li&gt;
+&lt;li&gt;be sure to provide an appropriate url&lt;/li&gt;
+&lt;li&gt;the timezone thing got me the first time through. just head to the &lt;a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones"&gt;List of tz database time zones&lt;/a&gt; on wikipedia&lt;/li&gt;
+&lt;li&gt;I say yes to generating a Fabfile/Makefile as well as site development script&lt;/li&gt;
+&lt;li&gt;I only say yes for GitHub Pages  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Now here is where you need to consider something a little different. I am setting up a site that is NOT my username.github.io account. If this is your first ever site you may want to consider just using it, but I already have one and installing a new site so I'm going with &lt;code&gt;N&lt;/code&gt; for the personal page piece. Just keep this in mind.&lt;/p&gt;
+&lt;p&gt;Now we need to add a couple of things. I want a &lt;code&gt;.gitignore&lt;/code&gt; file that will keep my published info out of my master branch as well as a couple of other files. You can just checkout the &lt;a href="https://github.com/brokenlyre/Polymathist.me"&gt;contents of the repo&lt;/a&gt; but for completeness herein this is my file:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# Python-generated Files
+__pycache__/
+.ipynb_checkpoints/
+
+# Pelican output
+output/
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Because of my prior experience, in my content directory, I am going to add a few folders:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;extra&lt;/strong&gt;&lt;br&gt;
+This will house my &lt;code&gt;CNAME&lt;/code&gt; and &lt;code&gt;favicon.ico&lt;/code&gt; file&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;media&lt;/strong&gt;&lt;br&gt;
+All of the images that I might use on the site&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;pages&lt;/strong&gt;&lt;br&gt;
+This is meant by pelican to store static pages that can be referenced as opposed to the blog&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;drafts&lt;/strong&gt;&lt;br&gt;
+This is just a place I store content that I'm not ready to publish but that I want included in my repository for safekeeping&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As far as file creation, the most important one that I want to deal with right away is the CNAME file. I am going to have my domain registrar point to this repo so I definitely want to be sure this file represents the expectations. It's pretty simple and you just need to change it for your needs:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;www.site-name.com
+site-name.com
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To round things out and get a feel for the site when it's live, I just create a markdown file in the content folder so that the site generator has something to push. By-the-by, if you are using sublime, you can make great use of snippets to get a head start on the meta information required for the posts. Feel free to take a look at my &lt;a href="https://gist.github.com/brokenlyre/ee91a3947fec759e4902808f7f811614"&gt;New Meta Post Snippet Gist&lt;/a&gt; if you care for a head start.&lt;/p&gt;
+&lt;h2&gt;Combing the &lt;code&gt;*conf.py&lt;/code&gt; files&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;To get to the right place I simply copied most of my settings using the bootstrap 3 theme. I'm sure I will be taking the time at some point to change this, but it's a quick way to get things up and running.&lt;/li&gt;
+&lt;li&gt;In the makefile I made sure to put in a line for the right repository for the github pages account &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;GITHUB_PAGES_REMOTE&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;git@github.com:username/username.github.io.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ul&gt;
+&lt;li&gt;I also make sure that the branch is set to gh-pages  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;GITHUB_PAGES_BRANCH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;gh-pages
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2&gt;Run &lt;code&gt;make html&lt;/code&gt; and &lt;code&gt;make gituhub&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;Run &lt;code&gt;make html&lt;/code&gt; and take a gander at the output. To really check things out right, spin up a local server by running &lt;code&gt;make serve&lt;/code&gt; and then opening a browser to &lt;code&gt;localhost&lt;/code&gt;. You should be able to have a pretty solid experience before pushing this all into production.&lt;/p&gt;
+&lt;p&gt;It's time to get that site into the repository. If everything is set up correctly then once you run &lt;code&gt;make github&lt;/code&gt; all of your &lt;code&gt;.html&lt;/code&gt; files will find their way into the &lt;code&gt;gh-pages&lt;/code&gt; branch of your repo. With that and the fact that you have an appropriate &lt;code&gt;CNAME&lt;/code&gt; file, you should be able to check the settings of the repo and notice that it's already picked up the custom domain for your use. Now you just need to be sure that the registrar has some updated settings.&lt;/p&gt;
+&lt;h2&gt;Updating the Registrar&lt;/h2&gt;
+&lt;p&gt;I use google domains - but in essence every domain registrar should have something similar when it comes to setting up the DNS.  You need and apex entry (or two depending how things are set up) and a www entry.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;NAME&lt;/th&gt;
+&lt;th&gt;TYPE&lt;/th&gt;
+&lt;th&gt;TTL&lt;/th&gt;
+&lt;th&gt;DATA&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;@&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;td&gt;1h&lt;/td&gt;
+&lt;td&gt;192.30.252.153&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;192.30.252.154&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;www&lt;/td&gt;
+&lt;td&gt;CNAME&lt;/td&gt;
+&lt;td&gt;1h&lt;/td&gt;
+&lt;td&gt;username.github.io&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;Even if this is a project site, just put in the &lt;code&gt;username.github.io&lt;/code&gt; version and don't attempt to add a directory in line. You can then head to your website url and see how fast the dns updates. In my case the updates took a couple of hours. So don't sweat it if the site doesn't load right away.&lt;/p&gt;
+&lt;h2&gt;And..... go&lt;/h2&gt;
+&lt;p&gt;Hopefully this ~~gits~~ gets you to a good spot with setting up a static site. I'm sure I've missed a thing here and there. Feel free to offer a correction on my &lt;a href="https://github.com/brokenlyre/Polymathist.me/issues"&gt;issues page&lt;/a&gt; if you do see anything grossly out of order.&lt;/p&gt;
+&lt;p&gt;Regards,&lt;br&gt;
+Stuart&lt;/p&gt;</content><category term="writing"></category><category term="website"></category><category term="pelican"></category><category term="git"></category></entry><entry><title>What I Need in my Organizational Life</title><link href="http://www.polymathist.me/blog/2018/07/04/need-organization-life/" rel="alternate"></link><published>2018-07-04T21:00:00-04:00</published><updated>2018-07-04T21:00:00-04:00</updated><author><name>Stuart Davis</name></author><id>tag:www.polymathist.me,2018-07-04:/blog/2018/07/04/need-organization-life/</id><summary type="html">
 I've dealt with organizing and re-organizing and I'm sure I'll just continue dealing with it. I've tried so many different ways to stay organized that it's impossible to keep them organized! I've got too many tools that fill various gaps and I'm wondering if I can bring it all together. It's not that I'm not organized. Frankly many people around me seem to consider me to be very organized and to a certain extent I believe that I am. But it's as though I've turned into an on-and-off again collector of organizational systems. I flow in and out of them as I become more or less anxious about the things going on in my life. Analog and digital systems are all fair game when it comes to the various whims I'm feeling.&lt;/p&gt;
 &lt;p&gt;Now, more than ever, I'm feeling pulled toward creating my own solution. It will likely start with a conglomeration of the various services and solutions that currently exist, but I hope that over time I can venture into a ground up amalgamation of the features I find most beneficial. Let's take a moment to run through some thoughts and practices tangential to all of this.
 </summary><content type="html">&lt;h2&gt;The Struggle Never Ends&lt;/h2&gt;

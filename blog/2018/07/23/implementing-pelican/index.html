@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="english" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<head>
+    <title>Implementing Pelican - Stuart M. Davis - Polymath</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <link href="http://www.polymathist.me/./favicon.ico" rel="icon">
+
+<link rel="canonical" href="http://www.polymathist.me/blog/2018/07/23/implementing-pelican/">
+
+        <meta name="author" content="Stuart Davis" />
+        <meta name="keywords" content="writing,website,pelican,git" />
+        <meta name="description" content="I had already mentioned here that I would write about the process of rolling out this website via Pelican and github pages. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that&#39;s a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider." />
+
+        <meta property="og:site_name" content="Stuart M. Davis - Polymath" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Implementing Pelican"/>
+        <meta property="og:url" content="http://www.polymathist.me/blog/2018/07/23/implementing-pelican/"/>
+        <meta property="og:description" content="I had already mentioned here that I would write about the process of rolling out this website via Pelican and github pages. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that&#39;s a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider."/>
+        <meta property="article:published_time" content="2018-07-23" />
+            <meta property="article:section" content="blog" />
+            <meta property="article:tag" content="writing" />
+            <meta property="article:tag" content="website" />
+            <meta property="article:tag" content="pelican" />
+            <meta property="article:tag" content="git" />
+            <meta property="article:author" content="Stuart Davis" />
+
+
+
+    <!-- Bootstrap -->
+        <link rel="stylesheet" href="http://www.polymathist.me/theme/css/bootstrap.min.css" type="text/css"/>
+    <link href="http://www.polymathist.me/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="http://www.polymathist.me/theme/css/pygments/native.css" rel="stylesheet">
+    <link rel="stylesheet" href="http://www.polymathist.me/theme/css/style.css" type="text/css"/>
+
+        <link href="http://www.polymathist.me/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Stuart M. Davis - Polymath ATOM Feed"/>
+
+
+
+        <link href="http://www.polymathist.me/feeds/blog.atom.xml" type="application/atom+xml" rel="alternate"
+              title="Stuart M. Davis - Polymath blog ATOM Feed"/>
+
+</head>
+<body>
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="http://www.polymathist.me/" class="navbar-brand">
+Stuart M. Davis - Polymath            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-ex1-collapse">
+            <ul class="nav navbar-nav">
+                    <li><a href="/pages/stuart-m-davis-philosophies.html">Philosophies</a></li>
+                    <li><a href="/category/blog.html">Blog</a></li>
+                    <li><a href="/pages/stuart-m-davis-resume.html">CV</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+</div> <!-- /.navbar -->
+
+<!-- Banner -->
+<!-- End Banner -->
+
+<!-- Content Container -->
+<div class="container">
+    <div class="row">
+        <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="http://www.polymathist.me/blog/2018/07/23/implementing-pelican/"
+                       rel="bookmark"
+                       title="Permalink to Implementing Pelican">
+                        Implementing Pelican
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <span class="label label-default">Date</span>
+    <span class="published">
+        <i class="fa fa-calendar"></i><time datetime="2018-07-23T16:00:00-04:00"> Mon 23 July 2018</time>
+    </span>
+
+
+
+
+
+<span class="label label-default">Tags</span>
+	<a href="http://www.polymathist.me/tag/writing.html">writing</a>
+        /
+	<a href="http://www.polymathist.me/tag/website.html">website</a>
+        /
+	<a href="http://www.polymathist.me/tag/pelican.html">pelican</a>
+        /
+	<a href="http://www.polymathist.me/tag/git.html">git</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <h2>Let's roll out!</h2>
+<p>
+I had already mentioned <a href="./rebuilding-web-presence.html">here</a> that I would write about the process of rolling out this website via <a href="(https://blog.getpelican.com/)">Pelican</a> and <a href="(https://pages.github.com/)">github pages</a>. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
+</p>
+<h2>Get Pelican</h2>
+<p>Well... I suppose that's a couple of stages down the road. First thing to realize is that Pelican is a Python solution and as such you will need a python environment. That's fairly easily accomplished by grabbing the latest distribution from <a href="(https://www.anaconda.com/download/)">anaconda</a>. You will also need a github account and will need to download and install <a href="(https://git-scm.com/downloads)">git</a>.</p>
+<p>Now here's where I'm going to mess things up quite a bit because it's a part that I'm not really wanting to replicate as I already have my environment installed. But I can summarize a few things that you will readily find at the <a href="(https://blog.getpelican.com/)">Pelican</a> reference documentation. But once Python is installed, open up the anaconda prompt and fire off the following command:</p>
+<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
+</pre></div>
+
+
+<p>Pelican will get you running out of the gate with reStructureText but as I was simply looking for ease of typing I decided that I wanted to opt for Markdown and as such need the following:</p>
+<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Markdown</span>
+</pre></div>
+
+
+<p>As with almost any python install, It's good to ensure that you have the real latest version which may not actually be what came through pip. So...</p>
+<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pelican</span>
+</pre></div>
+
+
+<p>Now you're pretty much ready to kick start a project. I navigated to an appropriate place to manage my repository for the source files for this project. In some cases you many need to make a folder and then head into it. Regardless, once you're in that base directory kick of the process with:</p>
+<div class="highlight"><pre><span></span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+
+
+<p>There's a lot to consider with the quickstart. A lot of options you can just accept as default but you absolutely need to pay attention to the deployment options. Many of the items are editable after the fact in the <code>pelicanconf.py</code> and <code>publishconf.py</code>. Additional considerations evolve around generation and deployment through either Fabric or Make. As such there will be items that are configurable in <code>fabfile.py</code> or <code>Makefile</code> respectively. I say all that to say this... please be sure to reference the <a href="(http://docs.getpelican.com/en/stable/index.html)">Pelican documentation</a> a lot and many times over. A lot of it didn't sink in the first time through.</p>
+<h2>My process</h2>
+<p>In anaconda I navigated to my project directory then made a file to house my documents</p>
+<div class="highlight"><pre><span></span>mkdir /path/to/repo-name
+<span class="nb">cd</span> /path/to/repo-name
+</pre></div>
+
+
+<p>In git I navigated to the folder and then initialized a repository</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/repo-name
+git init
+</pre></div>
+
+
+<p>In github I created a repository for these source files to reside in the master branch with the intention that the published information will land in the gh-pages branch. So in my local directory I simply create a <code>Readme.md</code> file that I will be able to push to the blank repository in github. Then I used the next commands to create a gh-pages branch</p>
+<div class="highlight"><pre><span></span><span class="nb">cd</span> /path/to/repo-name
+git symbolic-ref HEAD refs/heads/gh-pages
+rm .git/index
+git clean -fdx
+<span class="nb">echo</span> <span class="s2">&quot;My GitHub Page&quot;</span> &gt; index.html
+git add .
+git commit -a -m <span class="s2">&quot;First pages commit&quot;</span>
+git push origin gh-pages
+</pre></div>
+
+
+<p>This ensures that there is a gh-pages branch to which we will publish our site documents and host the site files.</p>
+<p>Now we need to switch back to the master branch and start up pelican</p>
+<p>In git bash</p>
+<div class="highlight"><pre><span></span>git checkout master
+</pre></div>
+
+
+<p>In anaconda</p>
+<div class="highlight"><pre><span></span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
+</pre></div>
+
+
+<ul>
+<li>create in root <code>.</code><br>
+if you aren't in the root directory of your repo you can point it where you need it to go.  </li>
+<li>be sure to provide an appropriate url</li>
+<li>the timezone thing got me the first time through. just head to the <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones">List of tz database time zones</a> on wikipedia</li>
+<li>I say yes to generating a Fabfile/Makefile as well as site development script</li>
+<li>I only say yes for GitHub Pages  </li>
+</ul>
+<p>Now here is where you need to consider something a little different. I am setting up a site that is NOT my username.github.io account. If this is your first ever site you may want to consider just using it, but I already have one and installing a new site so I'm going with <code>N</code> for the personal page piece. Just keep this in mind.</p>
+<p>Now we need to add a couple of things. I want a <code>.gitignore</code> file that will keep my published info out of my master branch as well as a couple of other files. You can just checkout the <a href="https://github.com/brokenlyre/Polymathist.me">contents of the repo</a> but for completeness herein this is my file:</p>
+<div class="highlight"><pre><span></span># Python-generated Files
+__pycache__/
+.ipynb_checkpoints/
+
+# Pelican output
+output/
+</pre></div>
+
+
+<p>Because of my prior experience, in my content directory, I am going to add a few folders:</p>
+<ul>
+<li><strong>extra</strong><br>
+This will house my <code>CNAME</code> and <code>favicon.ico</code> file</li>
+<li><strong>media</strong><br>
+All of the images that I might use on the site</li>
+<li><strong>pages</strong><br>
+This is meant by pelican to store static pages that can be referenced as opposed to the blog</li>
+<li><strong>drafts</strong><br>
+This is just a place I store content that I'm not ready to publish but that I want included in my repository for safekeeping</li>
+</ul>
+<p>As far as file creation, the most important one that I want to deal with right away is the CNAME file. I am going to have my domain registrar point to this repo so I definitely want to be sure this file represents the expectations. It's pretty simple and you just need to change it for your needs:</p>
+<div class="highlight"><pre><span></span>www.site-name.com
+site-name.com
+</pre></div>
+
+
+<p>To round things out and get a feel for the site when it's live, I just create a markdown file in the content folder so that the site generator has something to push. By-the-by, if you are using sublime, you can make great use of snippets to get a head start on the meta information required for the posts. Feel free to take a look at my <a href="https://gist.github.com/brokenlyre/ee91a3947fec759e4902808f7f811614">New Meta Post Snippet Gist</a> if you care for a head start.</p>
+<h2>Combing the <code>*conf.py</code> files</h2>
+<ul>
+<li>To get to the right place I simply copied most of my settings using the bootstrap 3 theme. I'm sure I will be taking the time at some point to change this, but it's a quick way to get things up and running.</li>
+<li>In the makefile I made sure to put in a line for the right repository for the github pages account </li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">GITHUB_PAGES_REMOTE</span><span class="o">=</span>git@github.com:username/username.github.io.git
+</pre></div>
+
+
+<ul>
+<li>I also make sure that the branch is set to gh-pages  </li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nv">GITHUB_PAGES_BRANCH</span><span class="o">=</span>gh-pages
+</pre></div>
+
+
+<h2>Run <code>make html</code> and <code>make gituhub</code></h2>
+<p>Run <code>make html</code> and take a gander at the output. To really check things out right, spin up a local server by running <code>make serve</code> and then opening a browser to <code>localhost</code>. You should be able to have a pretty solid experience before pushing this all into production.</p>
+<p>It's time to get that site into the repository. If everything is set up correctly then once you run <code>make github</code> all of your <code>.html</code> files will find their way into the <code>gh-pages</code> branch of your repo. With that and the fact that you have an appropriate <code>CNAME</code> file, you should be able to check the settings of the repo and notice that it's already picked up the custom domain for your use. Now you just need to be sure that the registrar has some updated settings.</p>
+<h2>Updating the Registrar</h2>
+<p>I use google domains - but in essence every domain registrar should have something similar when it comes to setting up the DNS.  You need and apex entry (or two depending how things are set up) and a www entry.</p>
+<table>
+<thead>
+<tr>
+<th>NAME</th>
+<th>TYPE</th>
+<th>TTL</th>
+<th>DATA</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>@</td>
+<td>A</td>
+<td>1h</td>
+<td>192.30.252.153</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td>192.30.252.154</td>
+</tr>
+<tr>
+<td>www</td>
+<td>CNAME</td>
+<td>1h</td>
+<td>username.github.io</td>
+</tr>
+</tbody>
+</table>
+<p>Even if this is a project site, just put in the <code>username.github.io</code> version and don't attempt to add a directory in line. You can then head to your website url and see how fast the dns updates. In my case the updates took a couple of hours. So don't sweat it if the site doesn't load right away.</p>
+<h2>And..... go</h2>
+<p>Hopefully this ~~gits~~ gets you to a good spot with setting up a static site. I'm sure I've missed a thing here and there. Feel free to offer a correction on my <a href="https://github.com/brokenlyre/Polymathist.me/issues">issues page</a> if you do see anything grossly out of order.</p>
+<p>Regards,<br>
+Stuart</p>
+            </div>
+            <!-- /.entry-content -->
+        </article>
+    </section>
+
+        </div>
+        <div class="col-sm-3" id="sidebar">
+            <aside>
+<div id="aboutme">
+        <p>
+            <img width="100%" class="img-thumbnail" src="http://www.polymathist.me//media/SMD_Self.jpg"/>
+        </p>
+    <p>
+      <strong>About Stuart M. Davis</strong><br/>
+        Obstacle Crusher and Creativity Beckoner. Regardless of the position I am in, I develop fiercely honest relationships that advance personal growth, critical thinking and boldly simply execution.
+    </p>
+</div><!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://twitter.com/stuartmdavis"><i class="fa fa-twitter-square fa-lg"></i> twitter</a></li>
+    <li class="list-group-item"><a href="http://www.linkedin.com/in/stuartmdavis/"><i class="fa fa-linkedin-square fa-lg"></i> linkedin</a></li>
+    <li class="list-group-item"><a href="https://www.reddit.com/user/smdavis42"><i class="fa fa-reddit-square fa-lg"></i> reddit</a></li>
+    <li class="list-group-item"><a href="https://www.instagram.com/stuartmdavis/"><i class="fa fa-instagram fa-lg"></i> instagram</a></li>
+    <li class="list-group-item"><a href="https://www.pinterest.com/stuartmdavis/"><i class="fa fa-pinterest-square fa-lg"></i> pinterest</a></li>
+    <li class="list-group-item"><a href="https://www.quora.com/profile/Stuart-Davis-2"><i class="fa fa-quora-square fa-lg"></i> quora</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+
+<!-- Sidebar/Tag Cloud -->
+<li class="list-group-item">
+  <a href="http://www.polymathist.me/tags.html"><h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Tags</span></h4></a>
+  <ul class="list-group " id="tags">
+    <li class="list-group-item tag-1">
+      <a href="http://www.polymathist.me/tag/writing.html">writing</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/pelican.html">pelican</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/website.html">website</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/developing.html">developing</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/gtd.html">gtd</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/process.html">process</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/creating.html">creating</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/approach.html">approach</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/organizing.html">organizing</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.polymathist.me/tag/git.html">git</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Tag Cloud -->
+
+<!-- Sidebar/Archive -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Archive</span></h4>
+  <ul class="list-group" id="archive">
+        <li class="list-group-item">
+          <a href="http://www.polymathist.me/posts/2018/Jul/index.html"><i class="fa fa-calendar fa-lg"></i>July 2018 (2)
+          </a>
+        </li>
+        <li class="list-group-item">
+          <a href="http://www.polymathist.me/posts/2018/Jun/index.html"><i class="fa fa-calendar fa-lg"></i>June 2018 (1)
+          </a>
+        </li>
+  </ul>
+</li>
+<!-- End Sidebar/Archive -->
+  </ul>
+</section>
+<!-- End Sidebar -->            </aside>
+        </div>
+    </div>
+</div>
+<!-- End Content Container -->
+
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2018 Stuart M. Davis
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+<script src="http://www.polymathist.me/theme/js/jquery.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="http://www.polymathist.me/theme/js/bootstrap.min.js"></script>
+
+<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+<script src="http://www.polymathist.me/theme/js/respond.min.js"></script>
+
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-10053168-4']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script');
+            ga.type = 'text/javascript';
+            ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
+    <!-- End Google Analytics Code -->
+
+
+</body>
+</html>
