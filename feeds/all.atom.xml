@@ -1,9 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Stuart M. Davis - Polymath</title><link href="http://www.polymathist.me/" rel="alternate"></link><link href="http://www.polymathist.me/feeds/all.atom.xml" rel="self"></link><id>http://www.polymathist.me/</id><updated>2018-07-23T16:00:00-04:00</updated><entry><title>Implementing Pelican</title><link href="http://www.polymathist.me/blog/2018/07/23/implementing-pelican/" rel="alternate"></link><published>2018-07-23T16:00:00-04:00</published><updated>2018-07-23T16:00:00-04:00</updated><author><name>Stuart Davis</name></author><id>tag:www.polymathist.me,2018-07-23:/blog/2018/07/23/implementing-pelican/</id><summary type="html">
-I had already mentioned &lt;a href="./rebuilding-web-presence.html"&gt;here&lt;/a&gt; that I would write about the process of rolling out this website via &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; and &lt;a href="https://pages.github.com/"&gt;github pages&lt;/a&gt;. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Stuart M. Davis - Polymath</title><link href="http://www.polymathist.me/" rel="alternate"></link><link href="http://www.polymathist.me/feeds/all.atom.xml" rel="self"></link><id>http://www.polymathist.me/</id><updated>2018-07-24T12:30:00-04:00</updated><entry><title>Sphinx, Intersphinx, &amp; Submodules for Document Compendium</title><link href="http://www.polymathist.me/blog/2018/07/24/sphinx-submodules/" rel="alternate"></link><published>2018-07-24T12:30:00-04:00</published><updated>2018-07-24T12:30:00-04:00</updated><author><name>Stuart Davis</name></author><id>tag:www.polymathist.me,2018-07-24:/blog/2018/07/24/sphinx-submodules/</id><summary type="html">
+I love that in the course of my work I get the opportunity to be exposed to a lot of different initiatives with the chance to make some impact. One of the major efforts being carried on by a select few right now is to codify our standards of execution as well training, references, and best practice documentation amongst a slew of other potential tangents. We've landed pretty solidly on implementing the presentation layer with &lt;a href="http://sphinx-doc.org/"&gt;Sphinx&lt;/a&gt;, a documentation generator that is already quite prevalent for offering docs alongside a codebase. We started off with a handful of individual repositories with the same installation pattern each covering a sensible category of information. The desire was to bring this all together in one place. There are two cheap ways to do that.&lt;br&gt;
+</summary><content type="html">&lt;h2&gt;Read the Docs in the Docs&lt;/h2&gt;
+&lt;p&gt;
+I love that in the course of my work I get the opportunity to be exposed to a lot of different initiatives with the chance to make some impact. One of the major efforts being carried on by a select few right now is to codify our standards of execution as well training, references, and best practice documentation amongst a slew of other potential tangents. We've landed pretty solidly on implementing the presentation layer with &lt;a href="http://sphinx-doc.org/"&gt;Sphinx&lt;/a&gt;, a documentation generator that is already quite prevalent for offering docs alongside a codebase. We started off with a handful of individual repositories with the same installation pattern each covering a sensible category of information. The desire was to bring this all together in one place. There are two cheap ways to do that.&lt;br&gt;
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Copy all of the documentation directly in a single one and just drop the other repositories.&lt;/li&gt;
+&lt;li&gt;Simply create a page that links out to the other repositories wherein the user switches environments from one set to another.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3&gt;What we really want&lt;/h3&gt;
+&lt;p&gt;What we really wanted was the ability to maintain stable independent sensible collections of documentation that could be used on their own &lt;strong&gt;AND&lt;/strong&gt; to have all of the content centralized in one collection in which the user &lt;em&gt;does not&lt;/em&gt; change context as they are click around.&lt;/p&gt;
+&lt;h3&gt;Where the challenge is&lt;/h3&gt;
+&lt;p&gt;The challenge here is that some of these individual documents have links to other documents where those links are currently in the form of full URLs. So how do we maintain links across these docs when they are separate but also within the docs when they are combined?&lt;/p&gt;
+&lt;h2&gt;Intersphinx&lt;/h2&gt;
+&lt;p&gt;So right now, as mentioned previously, one document reaches another document by fully verbose URLs.&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Verbose URL Link" src="./media/verboseurl.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;As a first step we can implement cross reference labels to assist with linking inside of documentation. (Be sure to take a look at the &lt;a href="http://www.sphinx-doc.org/en/stable/markup/inline.html#role-ref"&gt;&lt;code&gt;:ref:&lt;/code&gt; role&lt;/a&gt; documentation to learn more). In summary you can put a &lt;code&gt;:ref:&lt;/code&gt; role before a heading with a label and then reference that label later on to create a link. So:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="nt"&gt;_myFancyLabel:&lt;/span&gt;
+
+&lt;span class="gh"&gt;Section Header&lt;/span&gt;
+&lt;span class="gh"&gt;==============&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Can be referenced later on with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Check out the cool information in :ref:&amp;#39;myFancyLabel&amp;#39; to learn more
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Which will show up as a link like&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Check out the cool information in &lt;a href="url"&gt;Section Header&lt;/a&gt; to learn more&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;By applying this methodology internally the connections feel something like this:&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Mixed Links" src="./media/mixedlinks.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;Now what's happening under the covers is that Sphinx is putting those references into an &lt;code&gt;objects.inv&lt;/code&gt; file that allows it to resolve the references to the full urls relative to the documentation's root. This is handy. If you can have one set of documentation retrieve that &lt;code&gt;objects.inv&lt;/code&gt; file from another set of documentation then you can leverage the references without knowing the full url. Something like...&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Intersphinxing" src="./media/interpshinx.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;This is accomplished by using the intersphinx extension and using the appropriate reference labels. You need to first enable intersphinx in your &lt;code&gt;conf.py&lt;/code&gt; file with:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
+    &lt;span class="s1"&gt;&amp;#39;sphinx.ext.intersphinx&amp;#39;&lt;/span&gt;
+&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and then creating the appropriate mapping with something like...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;intersphinx_mapping&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;python&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;https://docs.python.org/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+                   &lt;span class="s1"&gt;&amp;#39;document_b&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;http://www.fullurltodocs.com/&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="bp"&gt;None&lt;/span&gt;&lt;span class="p"&gt;)}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The grand thing with intersphinx is that as long as there is no label naming collision between the local document (the one that folks are viewing) and the remote document (the one you're trying to link to), then simple &lt;code&gt;:ref:&lt;/code&gt; links work just as that should. If there is a risk of collision then you simply make the link a little more verbose with something like...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Check out the cool information in &lt;span class="na"&gt;:ref:&lt;/span&gt;&lt;span class="nv"&gt;`this document&amp;#39;s stuff &amp;lt;document_b:myFancyLabel&amp;gt;`&lt;/span&gt; to learn more
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This will ensure that Sphinx only grabs the &lt;code&gt;myFancyLabel&lt;/code&gt; anchor in &lt;code&gt;document_b&lt;/code&gt;'s documentation regardless of its existence in the local document.&lt;/p&gt;
+&lt;p&gt;Now if you have a master plan as you are writing your documentation perhaps you (read: I) would go the extra step to create a convention of reference creating to ensure uniqueness within and among documents. It's a little tedious but making a label like &lt;code&gt;_docname_page_section&lt;/code&gt; as opposed to simply &lt;code&gt;_section&lt;/code&gt; will allow you to control your surroundings. This becomes especially true if what you want is:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;maintain stable independent sensible collections of documentation that could be used on their own &lt;strong&gt;AND&lt;/strong&gt; to have all of the content centralized in one collection in which the user &lt;em&gt;does not&lt;/em&gt; change context as they are click around.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Ah yes... I knew we had a plan here.&lt;/p&gt;
+&lt;h2&gt;Submodules&lt;/h2&gt;
+&lt;p&gt;The answer here is to leverage the submodule capabilities in git. By including a repository as a submodule within a host repository, the host will consider the submodule to be of its own. By pulling and committing updates recursively and in the right order, you can keep the host documentation in sync. The benefit of all of this when it comes to Sphinx is that you would have one master documentation resource with a singular table of contents tree and the user will stay within that single construct. Sort of like this...&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Submodule" src="./media/submodule.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;p&gt;Now getting to that point where you have your independent and collective documentation set takes just a little git patience. My patience was initially shored up with a quick read of &lt;a href="http://fmarco76.github.io/git%20and%20related%20services/readthedocs/"&gt;an article by Marco Fargetta&lt;/a&gt;. I'd recommend you give it a quick read as well. First, be sure that your documents are as current as can be, committed and pushed. Now head into the root of your host repo (local) and run the following to get the child repo inducted:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git submodule add https://github.com/username/repository.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;That should create a folder for the repository and bring in all of the appropriate files. Now you need to head to your index page and add some entries into the TOC tree to the new content. Something simple like:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="gh"&gt;My Documents&lt;/span&gt;
+&lt;span class="gh"&gt;============&lt;/span&gt;
+
+&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="ow"&gt;toctree&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;
+&lt;span class="nc"&gt;:maxdepth:&lt;/span&gt; &lt;span class="nf"&gt;2&lt;/span&gt;
+&lt;span class="nc"&gt;:caption:&lt;/span&gt; &lt;span class="nf"&gt;Contents:&lt;/span&gt;
+
+pre-existing links
+submodulerepofolder/index
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;When you &lt;code&gt;make html&lt;/code&gt; for this new construct, the submodule will now be included in your host documentation. And if you've been following along and setting reference anchors and using those as opposed to links, then all of the links between sections of your documentation will be dancing along just nicely.&lt;/p&gt;
+&lt;p&gt;Now let's have a moment of sober honesty. Mucking around with submodules can be a hassle and becoming fully familiar with the various options of the &lt;code&gt;git submodule&lt;/code&gt; is recommended. To that end, a thorough couple of reads through &lt;a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules"&gt;this documentation on Submodules&lt;/a&gt; should just begin to produce that familiarity. A couple of specific takeaways for me include:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git clone --recurse-submodules https://github.com/username/repository.git
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;... which will grab an entire repository along with the submodules &lt;strong&gt;and their contents&lt;/strong&gt;. Trust me. It's important.&lt;/p&gt;
+&lt;p&gt;Additionally...&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git submodule update --remote --recursive
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;... is an important tool to get your local repository updated through all of the submodule layers. Did I say layers? &lt;strong&gt;YES&lt;/strong&gt;! In our use case, we have the need for nested submodules and keeping everything organized takes a bit of work but the results are exactly what we needed. It sort of looks something like this:&lt;/p&gt;
+&lt;p&gt;&lt;center&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Our Use Case" src="./media/ourusecase.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;/center&gt;&lt;/p&gt;
+&lt;h2&gt;Breathe Out&lt;/h2&gt;
+&lt;p&gt;So yeah. It's been a been to run through both in real life and documenting it here to at least a surface level. I'm sure there are a lot of other options that could have been considered, but this seemed to meet the needs at the moment. Thanks for sticking with me on this ride. I look forward to seeing you on the next.&lt;/p&gt;
+&lt;p&gt;Regards,&lt;br&gt;
+Stuart&lt;/p&gt;</content><category term="writing"></category><category term="sphinx"></category><category term="git"></category><category term="submodules"></category><category term="intersphinx"></category></entry><entry><title>Implementing Pelican</title><link href="http://www.polymathist.me/blog/2018/07/23/implementing-pelican/" rel="alternate"></link><published>2018-07-23T16:00:00-04:00</published><updated>2018-07-23T16:00:00-04:00</updated><author><name>Stuart Davis</name></author><id>tag:www.polymathist.me,2018-07-23:/blog/2018/07/23/implementing-pelican/</id><summary type="html">
+I had already mentioned &lt;a href="./rebuilding-web-presence.html"&gt;here&lt;/a&gt; that I would write about the process of rolling out this website via &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; and &lt;a href="https://pages.github.com/"&gt;github pages&lt;/a&gt;. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure (or branch structure) needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
 </summary><content type="html">&lt;h2&gt;Let's roll out!&lt;/h2&gt;
 &lt;p&gt;
-I had already mentioned &lt;a href="./rebuilding-web-presence.html"&gt;here&lt;/a&gt; that I would write about the process of rolling out this website via &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; and &lt;a href="https://pages.github.com/"&gt;github pages&lt;/a&gt;. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
+I had already mentioned &lt;a href="./rebuilding-web-presence.html"&gt;here&lt;/a&gt; that I would write about the process of rolling out this website via &lt;a href="https://blog.getpelican.com/"&gt;Pelican&lt;/a&gt; and &lt;a href="https://pages.github.com/"&gt;github pages&lt;/a&gt;. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure (or branch structure) needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
 &lt;/p&gt;
 &lt;h2&gt;Get Pelican&lt;/h2&gt;
 &lt;p&gt;Well... I suppose that's a couple of stages down the road. First thing to realize is that Pelican is a Python solution and as such you will need a python environment. That's fairly easily accomplished by grabbing the latest distribution from &lt;a href="https://www.anaconda.com/download/"&gt;anaconda&lt;/a&gt;. You will also need a github account and will need to download and install &lt;a href="https://git-scm.com/downloads"&gt;git&lt;/a&gt;.&lt;/p&gt;
@@ -27,36 +137,36 @@ I had already mentioned &lt;a href="./rebuilding-web-presence.html"&gt;here&lt;/
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;There's a lot to consider with the quickstart. A lot of options you can just accept as default but you absolutely need to pay attention to the deployment options. Many of the items are editable after the fact in the &lt;code&gt;pelicanconf.py&lt;/code&gt; and &lt;code&gt;publishconf.py&lt;/code&gt;. Additional considerations evolve around generation and deployment through either Fabric or Make. As such there will be items that are configurable in &lt;code&gt;fabfile.py&lt;/code&gt; or &lt;code&gt;Makefile&lt;/code&gt; respectively. I say all that to say this... please be sure to reference the &lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;Pelican documentation&lt;/a&gt; a lot and many times over. A lot of it didn't sink in the first time through.&lt;/p&gt;
+&lt;p&gt;There's a lot to consider with the quickstart. A lot of options you can just accept as default but you absolutely need to pay attention to the deployment options. Don't stress too much as many of the items are editable after the fact in the &lt;code&gt;pelicanconf.py&lt;/code&gt; and &lt;code&gt;publishconf.py&lt;/code&gt;. Additional considerations revolve around generation and deployment through either Fabric or Make. As such there will be items that are configurable in &lt;code&gt;fabfile.py&lt;/code&gt; or &lt;code&gt;Makefile&lt;/code&gt; respectively. I say all that to say this... please be sure to reference the &lt;a href="http://docs.getpelican.com/en/stable/index.html"&gt;Pelican documentation&lt;/a&gt; a lot and many times over. A lot of it didn't sink in the first time through.&lt;/p&gt;
 &lt;h2&gt;My process&lt;/h2&gt;
-&lt;p&gt;In anaconda I navigated to my project directory then made a file to house my documents&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;mkdir /path/to/repo-name
-&lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
+&lt;p&gt;In anaconda I navigated to my project directory then made a folder to house my documents&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ mkdir /path/to/repo-name
+$ &lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;In git I navigated to the folder and then initialized a repository&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
-git init
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
+$ git init
 &lt;/pre&gt;&lt;/div&gt;
 
 
-&lt;p&gt;In github I created a repository for these source files to reside in the master branch with the intention that the published information will land in the gh-pages branch. So in my local directory I simply create a &lt;code&gt;Readme.md&lt;/code&gt; file that I will be able to push to the blank repository in github. Then I used the next commands to create a gh-pages branch&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
-git symbolic-ref HEAD refs/heads/gh-pages
-rm .git/index
-git clean -fdx
-&lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;My GitHub Page&amp;quot;&lt;/span&gt; &amp;gt; index.html
-git add .
-git commit -a -m &lt;span class="s2"&gt;&amp;quot;First pages commit&amp;quot;&lt;/span&gt;
-git push origin gh-pages
+&lt;p&gt;In github I created a repository for these source files to reside in the master branch with the intention that the published information will land in the gh-pages branch. So in my local directory I simply create a &lt;code&gt;Readme.md&lt;/code&gt; file that I will be able to push to the blank repository in github in the master branch. Then I used the next commands to create a gh-pages branch&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ &lt;span class="nb"&gt;cd&lt;/span&gt; /path/to/repo-name
+$ git symbolic-ref HEAD refs/heads/gh-pages
+$ rm .git/index
+$ git clean -fdx
+$ &lt;span class="nb"&gt;echo&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;My GitHub Page&amp;quot;&lt;/span&gt; &amp;gt; index.html
+$ git add .
+$ git commit -a -m &lt;span class="s2"&gt;&amp;quot;First pages commit&amp;quot;&lt;/span&gt;
+$ git push origin gh-pages
 &lt;/pre&gt;&lt;/div&gt;
 
 
 &lt;p&gt;This ensures that there is a gh-pages branch to which we will publish our site documents and host the site files.&lt;/p&gt;
 &lt;p&gt;Now we need to switch back to the master branch and start up pelican&lt;/p&gt;
 &lt;p&gt;In git bash&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git checkout master
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git checkout master
 &lt;/pre&gt;&lt;/div&gt;
 
 
