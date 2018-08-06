@@ -41,7 +41,7 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 &lt;p&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;Now what's happening under the covers is that Sphinx is putting those references into an &lt;code&gt;objects.inv&lt;/code&gt; file that allows it to resolve the references to the full urls relative to the documentation's root. This is handy. If you can have one set of documentation retrieve that &lt;code&gt;objects.inv&lt;/code&gt; file from another set of documentation then you can leverage the references without knowing the full url. Something like...&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Intersphinxing" src="http://www.polymathist.me/media/interpshinx.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Intersphinxing" src="http://www.polymathist.me/media/intersphinx.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;This is accomplished by using the intersphinx extension and using the appropriate reference labels. You need to first enable intersphinx in your &lt;code&gt;conf.py&lt;/code&gt; file with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
