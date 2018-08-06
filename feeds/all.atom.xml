@@ -16,7 +16,7 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 &lt;h2&gt;Intersphinx&lt;/h2&gt;
 &lt;p&gt;So right now, as mentioned previously, one document reaches another document by fully verbose URLs.&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Verbose URL Link" src="./media/verboseurl.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Verbose URL Link" src="http://www.polymathist.me/media/verboseurl.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;As a first step we can implement cross reference labels to assist with linking inside of documentation. (Be sure to take a look at the &lt;a href="http://www.sphinx-doc.org/en/stable/markup/inline.html#role-ref"&gt;&lt;code&gt;:ref:&lt;/code&gt; role&lt;/a&gt; documentation to learn more). In summary you can put a &lt;code&gt;:ref:&lt;/code&gt; role before a heading with a label and then reference that label later on to create a link. So:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="p"&gt;..&lt;/span&gt; &lt;span class="nt"&gt;_myFancyLabel:&lt;/span&gt;
@@ -37,11 +37,11 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 &lt;/blockquote&gt;
 &lt;p&gt;By applying this methodology internally the connections feel something like this:&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Mixed Links" src="./media/mixedlinks.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Mixed Links" src="http://www.polymathist.me/media/mixedlinks.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;Now what's happening under the covers is that Sphinx is putting those references into an &lt;code&gt;objects.inv&lt;/code&gt; file that allows it to resolve the references to the full urls relative to the documentation's root. This is handy. If you can have one set of documentation retrieve that &lt;code&gt;objects.inv&lt;/code&gt; file from another set of documentation then you can leverage the references without knowing the full url. Something like...&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Intersphinxing" src="./media/interpshinx.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Intersphinxing" src="http://www.polymathist.me/media/interpshinx.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;This is accomplished by using the intersphinx extension and using the appropriate reference labels. You need to first enable intersphinx in your &lt;code&gt;conf.py&lt;/code&gt; file with:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;extensions&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;
@@ -70,7 +70,7 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 &lt;h2&gt;Submodules&lt;/h2&gt;
 &lt;p&gt;The answer here is to leverage the submodule capabilities in git. By including a repository as a submodule within a host repository, the host will consider the submodule to be of its own. By pulling and committing updates recursively and in the right order, you can keep the host documentation in sync. The benefit of all of this when it comes to Sphinx is that you would have one master documentation resource with a singular table of contents tree and the user will stay within that single construct. Sort of like this...&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Submodule" src="./media/submodule.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Submodule" src="http://www.polymathist.me/media/submodule.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;p&gt;Now getting to that point where you have your independent and collective documentation set takes just a little git patience. My patience was initially shored up with a quick read of &lt;a href="http://fmarco76.github.io/git%20and%20related%20services/readthedocs/"&gt;an article by Marco Fargetta&lt;/a&gt;. I'd recommend you give it a quick read as well. First, be sure that your documents are as current as can be, committed and pushed. Now head into the root of your host repo (local) and run the following to get the child repo inducted:&lt;/p&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ git submodule add https://github.com/username/repository.git
@@ -104,7 +104,7 @@ submodulerepofolder/index
 
 &lt;p&gt;... is an important tool to get your local repository updated through all of the submodule layers. Did I say layers? &lt;strong&gt;YES&lt;/strong&gt;! In our use case, we have the need for nested submodules and keeping everything organized takes a bit of work but the results are exactly what we needed. It sort of looks something like this:&lt;/p&gt;
 &lt;p&gt;&lt;center&gt;&lt;/p&gt;
-&lt;p&gt;&lt;img alt="Our Use Case" src="./media/ourusecase.png"&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Our Use Case" src="http://www.polymathist.me/media/ourusecase.png"&gt;&lt;/p&gt;
 &lt;p&gt;&lt;/center&gt;&lt;/p&gt;
 &lt;h2&gt;Breathe Out&lt;/h2&gt;
 &lt;p&gt;So yeah. It's been a been to run through both in real life and documenting it here to at least a surface level. I'm sure there are a lot of other options that could have been considered, but this seemed to meet the needs at the moment. Thanks for sticking with me on this ride. I look forward to seeing you on the next.&lt;/p&gt;
