@@ -134,7 +134,7 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 <h2>Intersphinx</h2>
 <p>So right now, as mentioned previously, one document reaches another document by fully verbose URLs.</p>
 <p><center></p>
-<p><img alt="Verbose URL Link" src="http://www.polymathist.me/media/verboseurl.png"></p>
+<p><img alt="Verbose URL Link" src="http://www.brokenlyre.com/media/verboseurl.png"></p>
 <p></center></p>
 <p>As a first step we can implement cross reference labels to assist with linking inside of documentation. (Be sure to take a look at the <a href="http://www.sphinx-doc.org/en/stable/markup/inline.html#role-ref"><code>:ref:</code> role</a> documentation to learn more). In summary you can put a <code>:ref:</code> role before a heading with a label and then reference that label later on to create a link. So:</p>
 <div class="highlight"><pre><span></span><span class="p">..</span> <span class="nt">_myFancyLabel:</span>
@@ -155,11 +155,11 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 </blockquote>
 <p>By applying this methodology internally the connections feel something like this:</p>
 <p><center></p>
-<p><img alt="Mixed Links" src="http://www.polymathist.me/media/mixedlinks.png"></p>
+<p><img alt="Mixed Links" src="http://www.brokenlyre.com/media/mixedlinks.png"></p>
 <p></center></p>
 <p>Now what's happening under the covers is that Sphinx is putting those references into an <code>objects.inv</code> file that allows it to resolve the references to the full urls relative to the documentation's root. This is handy. If you can have one set of documentation retrieve that <code>objects.inv</code> file from another set of documentation then you can leverage the references without knowing the full url. Something like...</p>
 <p><center></p>
-<p><img alt="Intersphinxing" src="http://www.polymathist.me/media/intersphinx.png"></p>
+<p><img alt="Intersphinxing" src="http://www.brokenlyre.com/media/intersphinx.png"></p>
 <p></center></p>
 <p>This is accomplished by using the intersphinx extension and using the appropriate reference labels. You need to first enable intersphinx in your <code>conf.py</code> file with:</p>
 <div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
@@ -188,7 +188,7 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 <h2>Submodules</h2>
 <p>The answer here is to leverage the submodule capabilities in git. By including a repository as a submodule within a host repository, the host will consider the submodule to be of its own. By pulling and committing updates recursively and in the right order, you can keep the host documentation in sync. The benefit of all of this when it comes to Sphinx is that you would have one master documentation resource with a singular table of contents tree and the user will stay within that single construct. Sort of like this...</p>
 <p><center></p>
-<p><img alt="Submodule" src="http://www.polymathist.me/media/submodule.png"></p>
+<p><img alt="Submodule" src="http://www.brokenlyre.com/media/submodule.png"></p>
 <p></center></p>
 <p>Now getting to that point where you have your independent and collective documentation set takes just a little git patience. My patience was initially shored up with a quick read of <a href="http://fmarco76.github.io/git%20and%20related%20services/readthedocs/">an article by Marco Fargetta</a>. I'd recommend you give it a quick read as well. First, be sure that your documents are as current as can be, committed and pushed. Now head into the root of your host repo (local) and run the following to get the child repo inducted:</p>
 <div class="highlight"><pre><span></span>$ git submodule add https://github.com/username/repository.git
@@ -222,7 +222,7 @@ submodulerepofolder/index
 
 <p>... is an important tool to get your local repository updated through all of the submodule layers. Did I say layers? <strong>YES</strong>! In our use case, we have the need for nested submodules and keeping everything organized takes a bit of work but the results are exactly what we needed. It sort of looks something like this:</p>
 <p><center></p>
-<p><img alt="Our Use Case" src="http://www.polymathist.me/media/ourusecase.png"></p>
+<p><img alt="Our Use Case" src="http://www.brokenlyre.com/media/ourusecase.png"></p>
 <p></center></p>
 <h2>Breathe Out</h2>
 <p>So yeah. It's been quite a bit to run through both in real life and documenting it here to at least a surface level. I'm sure there are a lot of other options that could have been considered, but this seemed to meet the needs at the moment. Thanks for sticking with me on this ride. I look forward to seeing you on the next.</p>
