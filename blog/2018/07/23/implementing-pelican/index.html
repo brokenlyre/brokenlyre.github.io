@@ -41,10 +41,25 @@
         <link href="http://www.brokenlyre.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Stuart M. Davis ATOM Feed"/>
 
-
-
         <link href="http://www.brokenlyre.com/feeds/blog.atom.xml" type="application/atom+xml" rel="alternate"
               title="Stuart M. Davis blog ATOM Feed"/>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10053168-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', UA-10053168-4);
+    </script>
+    <!-- End Google Analytics Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','');</script>
+    <!-- End Google Tag Manager -->
 
 </head>
 <body>
@@ -117,68 +132,60 @@ Stuart M. Davis            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h2>Let's roll out!</h2>
-<p>
-I had already mentioned <a href="./rebuilding-web-presence.html">here</a> that I would write about the process of rolling out this website via <a href="https://blog.getpelican.com/">Pelican</a> and <a href="https://pages.github.com/">github pages</a>. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure (or branch structure) needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.
-</p>
+
+<p>I had already mentioned <a href="./rebuilding-web-presence.html">here</a> that I would write about the process of rolling out this website via <a href="https://blog.getpelican.com/">Pelican</a> and <a href="https://pages.github.com/">github pages</a>. Instead of trying to recollect how I did it for this website, I am going to go ahead a start cataloging what I do to get one of my other properties up and running. There will definitely be one thing that's a little different based on the folder structure (or branch structure) needed within the appropriate repository on github, but I will be sure to highlight that difference and note that it will be useful for others to consider.</p>
+
+
 <h2>Get Pelican</h2>
 <p>Well... I suppose that's a couple of stages down the road. First thing to realize is that Pelican is a Python solution and as such you will need a python environment. That's fairly easily accomplished by grabbing the latest distribution from <a href="https://www.anaconda.com/download/">anaconda</a>. You will also need a github account and will need to download and install <a href="https://git-scm.com/downloads">git</a>.</p>
 <p>Now here's where I'm going to mess things up quite a bit because it's a part that I'm not really wanting to replicate as I already have my environment installed. But I can summarize a few things that you will readily find at the <a href="https://blog.getpelican.com/">Pelican</a> reference documentation. But once Python is installed, open up the anaconda prompt and fire off the following command:</p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">pelican</span>
+</code></pre></div>
 
 <p>Pelican will get you running out of the gate with reStructureText but as I was simply looking for ease of typing I decided that I wanted to opt for Markdown and as such need the following:</p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">Markdown</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="n">Markdown</span>
+</code></pre></div>
 
 <p>As with almost any python install, It's good to ensure that you have the real latest version which may not actually be what came through pip. So...</p>
-<div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pelican</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">pelican</span>
+</code></pre></div>
 
 <p>Now you're pretty much ready to kick start a project. I navigated to an appropriate place to manage my repository for the source files for this project. In some cases you many need to make a folder and then head into it. Regardless, once you're in that base directory kick of the process with:</p>
-<div class="highlight"><pre><span></span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
+</code></pre></div>
 
 <p>There's a lot to consider with the quickstart. A lot of options you can just accept as default but you absolutely need to pay attention to the deployment options. Don't stress too much as many of the items are editable after the fact in the <code>pelicanconf.py</code> and <code>publishconf.py</code>. Additional considerations revolve around generation and deployment through either Fabric or Make. As such there will be items that are configurable in <code>fabfile.py</code> or <code>Makefile</code> respectively. I say all that to say this... please be sure to reference the <a href="http://docs.getpelican.com/en/stable/index.html">Pelican documentation</a> a lot and many times over. A lot of it didn't sink in the first time through.</p>
 <h2>My process</h2>
 <p>In anaconda I navigated to my project directory then made a folder to house my documents</p>
-<div class="highlight"><pre><span></span>$ mkdir /path/to/repo-name
-$ <span class="nb">cd</span> /path/to/repo-name
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>mkdir<span class="w"> </span>/path/to/repo-name
+$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/path/to/repo-name
+</code></pre></div>
 
 <p>In git I navigated to the folder and then initialized a repository</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /path/to/repo-name
-$ git init
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/path/to/repo-name
+$<span class="w"> </span>git<span class="w"> </span>init
+</code></pre></div>
 
 <p>In github I created a repository for these source files to reside in the master branch with the intention that the published information will land in the gh-pages branch. So in my local directory I simply create a <code>Readme.md</code> file that I will be able to push to the blank repository in github in the master branch. Then I used the next commands to create a gh-pages branch</p>
-<div class="highlight"><pre><span></span>$ <span class="nb">cd</span> /path/to/repo-name
-$ git symbolic-ref HEAD refs/heads/gh-pages
-$ rm .git/index
-$ git clean -fdx
-$ <span class="nb">echo</span> <span class="s2">&quot;My GitHub Page&quot;</span> &gt; index.html
-$ git add .
-$ git commit -a -m <span class="s2">&quot;First pages commit&quot;</span>
-$ git push origin gh-pages
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span><span class="nb">cd</span><span class="w"> </span>/path/to/repo-name
+$<span class="w"> </span>git<span class="w"> </span>symbolic-ref<span class="w"> </span>HEAD<span class="w"> </span>refs/heads/gh-pages
+$<span class="w"> </span>rm<span class="w"> </span>.git/index
+$<span class="w"> </span>git<span class="w"> </span>clean<span class="w"> </span>-fdx
+$<span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;My GitHub Page&quot;</span><span class="w"> </span>&gt;<span class="w"> </span>index.html
+$<span class="w"> </span>git<span class="w"> </span>add<span class="w"> </span>.
+$<span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-a<span class="w"> </span>-m<span class="w"> </span><span class="s2">&quot;First pages commit&quot;</span>
+$<span class="w"> </span>git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>gh-pages
+</code></pre></div>
 
 <p>This ensures that there is a gh-pages branch to which we will publish our site documents and host the site files.</p>
 <p>Now we need to switch back to the master branch and start up pelican</p>
 <p>In git bash</p>
-<div class="highlight"><pre><span></span>$ git checkout master
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>checkout<span class="w"> </span>master
+</code></pre></div>
 
 <p>In anaconda</p>
-<div class="highlight"><pre><span></span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span>
+</code></pre></div>
 
 <ul>
 <li>create in root <code>.</code><br>
@@ -190,14 +197,13 @@ if you aren't in the root directory of your repo you can point it where you need
 </ul>
 <p>Now here is where you need to consider something a little different. I am setting up a site that is NOT my username.github.io account. If this is your first ever site you may want to consider just using it, but I already have one and installing a new site so I'm going with <code>N</code> for the personal page piece. Just keep this in mind.</p>
 <p>Now we need to add a couple of things. I want a <code>.gitignore</code> file that will keep my published info out of my master branch as well as a couple of other files. You can just checkout the <a href="https://github.com/brokenlyre/Polymathist.me">contents of the repo</a> but for completeness herein this is my file:</p>
-<div class="highlight"><pre><span></span># Python-generated Files
-__pycache__/
+<div class="highlight"><pre><span></span><code><span class="gh"># Python-generated Files</span>
+<span class="gs">__pycache__</span>/
 .ipynb_checkpoints/
 
-# Pelican output
+<span class="gh"># Pelican output</span>
 output/
-</pre></div>
-
+</code></pre></div>
 
 <p>Because of my prior experience, in my content directory, I am going to add a few folders:</p>
 <ul>
@@ -211,10 +217,9 @@ This is meant by pelican to store static pages that can be referenced as opposed
 This is just a place I store content that I'm not ready to publish but that I want included in my repository for safekeeping</li>
 </ul>
 <p>As far as file creation, the most important one that I want to deal with right away is the CNAME file. I am going to have my domain registrar point to this repo so I definitely want to be sure this file represents the expectations. It's pretty simple and you just need to change it for your needs:</p>
-<div class="highlight"><pre><span></span>www.site-name.com
+<div class="highlight"><pre><span></span><code>www.site-name.com
 site-name.com
-</pre></div>
-
+</code></pre></div>
 
 <p>To round things out and get a feel for the site when it's live, I just create a markdown file in the content folder so that the site generator has something to push. By-the-by, if you are using sublime, you can make great use of snippets to get a head start on the meta information required for the posts. Feel free to take a look at my <a href="https://gist.github.com/brokenlyre/ee91a3947fec759e4902808f7f811614">New Meta Post Snippet Gist</a> if you care for a head start.</p>
 <h2>Combing the <code>*conf.py</code> files</h2>
@@ -222,16 +227,14 @@ site-name.com
 <li>To get to the right place I simply copied most of my settings using the bootstrap 3 theme. I'm sure I will be taking the time at some point to change this, but it's a quick way to get things up and running.</li>
 <li>In the makefile I made sure to put in a line for the right repository for the github pages account </li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nv">GITHUB_PAGES_REMOTE</span><span class="o">=</span>git@github.com:username/username.github.io.git
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nv">GITHUB_PAGES_REMOTE</span><span class="o">=</span>git@github.com:username/username.github.io.git
+</code></pre></div>
 
 <ul>
 <li>I also make sure that the branch is set to gh-pages  </li>
 </ul>
-<div class="highlight"><pre><span></span><span class="nv">GITHUB_PAGES_BRANCH</span><span class="o">=</span>gh-pages
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="nv">GITHUB_PAGES_BRANCH</span><span class="o">=</span>gh-pages
+</code></pre></div>
 
 <h2>Run <code>make html</code> and <code>make gituhub</code></h2>
 <p>Run <code>make html</code> and take a gander at the output. To really check things out right, spin up a local server by running <code>make serve</code> and then opening a browser to <code>localhost</code>. You should be able to have a pretty solid experience before pushing this all into production.</p>
@@ -318,37 +321,37 @@ Stuart</p>
       <a href="http://www.brokenlyre.com/tag/git.html">git</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/creating.html">creating</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/submodules.html">submodules</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/organizing.html">organizing</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/website.html">website</a>
+      <a href="http://www.brokenlyre.com/tag/process.html">process</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/developing.html">developing</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/pelican.html">pelican</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/process.html">process</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/gtd.html">gtd</a>
+      <a href="http://www.brokenlyre.com/tag/submodules.html">submodules</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/sphinx.html">sphinx</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/pelican.html">pelican</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/approach.html">approach</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/organizing.html">organizing</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/intersphinx.html">intersphinx</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/website.html">website</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/gtd.html">gtd</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/creating.html">creating</a>
     </li>
   </ul>
 </li>
@@ -402,23 +405,6 @@ Stuart</p>
 <script src="http://www.brokenlyre.com/theme/js/respond.min.js"></script>
 
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-10053168-4']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 
 </body>

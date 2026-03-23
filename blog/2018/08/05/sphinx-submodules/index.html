@@ -42,10 +42,25 @@
         <link href="http://www.brokenlyre.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
               title="Stuart M. Davis ATOM Feed"/>
 
-
-
         <link href="http://www.brokenlyre.com/feeds/blog.atom.xml" type="application/atom+xml" rel="alternate"
               title="Stuart M. Davis Blog ATOM Feed"/>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-10053168-4"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', UA-10053168-4);
+    </script>
+    <!-- End Google Analytics Code -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','');</script>
+    <!-- End Google Tag Manager -->
 
 </head>
 <body>
@@ -120,9 +135,10 @@ Stuart M. Davis            </a>
 </footer><!-- /.post-info -->                    </div>
                 </div>
                 <h2>Read the Docs in the Docs</h2>
-<p>
-I love that in the course of my work I get the opportunity to be exposed to a lot of different initiatives with the chance to make some impact. One of the major efforts being carried on by a select few right now is to codify our standards of execution as well training, references, and best practice documentation amongst a slew of other potential tangents. We've landed pretty solidly on implementing the presentation layer with <a href="http://sphinx-doc.org/">Sphinx</a>, a documentation generator that is already quite prevalent for offering docs alongside a codebase. We started off with a handful of individual repositories with the same installation pattern each covering a sensible category of information. The desire was to bring this all together in one place. There are two cheap ways to do that.<br>
-</p>
+
+<p>I love that in the course of my work I get the opportunity to be exposed to a lot of different initiatives with the chance to make some impact. One of the major efforts being carried on by a select few right now is to codify our standards of execution as well training, references, and best practice documentation amongst a slew of other potential tangents. We've landed pretty solidly on implementing the presentation layer with <a href="http://sphinx-doc.org/">Sphinx</a>, a documentation generator that is already quite prevalent for offering docs alongside a codebase. We started off with a handful of individual repositories with the same installation pattern each covering a sensible category of information. The desire was to bring this all together in one place. There are two cheap ways to do that.  </p>
+
+
 <ul>
 <li>Copy all of the documentation directly in a single one and just drop the other repositories.</li>
 <li>Simply create a page that links out to the other repositories wherein the user switches environments from one set to another.</li>
@@ -133,51 +149,55 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 <p>The challenge here is that some of these individual documents have links to other documents where those links are currently in the form of full URLs. So how do we maintain links across these docs when they are separate but also within the docs when they are combined?</p>
 <h2>Intersphinx</h2>
 <p>So right now, as mentioned previously, one document reaches another document by fully verbose URLs.</p>
-<p><center></p>
-<p><img alt="Verbose URL Link" src="http://www.brokenlyre.com/media/verboseurl.png"></p>
-<p></center></p>
+<center>
+
+![Verbose URL Link](http://www.polymathist.me/media/verboseurl.png)
+
+</center>
+
 <p>As a first step we can implement cross reference labels to assist with linking inside of documentation. (Be sure to take a look at the <a href="http://www.sphinx-doc.org/en/stable/markup/inline.html#role-ref"><code>:ref:</code> role</a> documentation to learn more). In summary you can put a <code>:ref:</code> role before a heading with a label and then reference that label later on to create a link. So:</p>
-<div class="highlight"><pre><span></span><span class="p">..</span> <span class="nt">_myFancyLabel:</span>
+<div class="highlight"><pre><span></span><code><span class="p">..</span> <span class="nt">_myFancyLabel:</span>
 
 <span class="gh">Section Header</span>
 <span class="gh">==============</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Can be referenced later on with:</p>
-<div class="highlight"><pre><span></span>Check out the cool information in :ref:&#39;myFancyLabel&#39; to learn more
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Check out the cool information in :ref:&#39;myFancyLabel&#39; to learn more
+</code></pre></div>
 
 <p>Which will show up as a link like</p>
 <blockquote>
 <p>Check out the cool information in <a href="url">Section Header</a> to learn more</p>
 </blockquote>
 <p>By applying this methodology internally the connections feel something like this:</p>
-<p><center></p>
-<p><img alt="Mixed Links" src="http://www.brokenlyre.com/media/mixedlinks.png"></p>
-<p></center></p>
+<center>
+
+![Mixed Links](http://www.polymathist.me/media/mixedlinks.png)
+
+</center>
+
 <p>Now what's happening under the covers is that Sphinx is putting those references into an <code>objects.inv</code> file that allows it to resolve the references to the full urls relative to the documentation's root. This is handy. If you can have one set of documentation retrieve that <code>objects.inv</code> file from another set of documentation then you can leverage the references without knowing the full url. Something like...</p>
-<p><center></p>
-<p><img alt="Intersphinxing" src="http://www.brokenlyre.com/media/intersphinx.png"></p>
-<p></center></p>
+<center>
+
+![Intersphinxing](http://www.polymathist.me/media/intersphinx.png)
+
+</center>
+
 <p>This is accomplished by using the intersphinx extension and using the appropriate reference labels. You need to first enable intersphinx in your <code>conf.py</code> file with:</p>
-<div class="highlight"><pre><span></span><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
+<div class="highlight"><pre><span></span><code><span class="n">extensions</span> <span class="o">=</span> <span class="p">[</span>
     <span class="s1">&#39;sphinx.ext.intersphinx&#39;</span>
 <span class="p">]</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>and then creating the appropriate mapping with something like...</p>
-<div class="highlight"><pre><span></span><span class="n">intersphinx_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;https://docs.python.org/&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">),</span>
-                   <span class="s1">&#39;document_b&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;http://www.fullurltodocs.com/&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)}</span>
-</pre></div>
-
+<div class="highlight"><pre><span></span><code><span class="n">intersphinx_mapping</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;python&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;https://docs.python.org/&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span>
+                   <span class="s1">&#39;document_b&#39;</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;http://www.fullurltodocs.com/&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)}</span>
+</code></pre></div>
 
 <p>The grand thing with intersphinx is that as long as there is no label naming collision between the local document (the one that folks are viewing) and the remote document (the one you're trying to link to), then simple <code>:ref:</code> links work just as that should. If there is a risk of collision then you simply make the link a little more verbose with something like...</p>
-<div class="highlight"><pre><span></span>Check out the cool information in <span class="na">:ref:</span><span class="nv">`this document&#39;s stuff &lt;document_b:myFancyLabel&gt;`</span> to learn more
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>Check out the cool information in <span class="na">:ref:</span><span class="nv">`this document&#39;s stuff &lt;document_b:myFancyLabel&gt;`</span> to learn more
+</code></pre></div>
 
 <p>This will ensure that Sphinx only grabs the <code>myFancyLabel</code> anchor in <code>document_b</code>'s documentation regardless of its existence in the local document.</p>
 <p>Now if you have a master plan as you are writing your documentation perhaps you (read: I) would go the extra step to create a convention of reference creating to ensure uniqueness within and among documents. It's a little tedious but making a label like <code>_docname_page_section</code> as opposed to simply <code>_section</code> will allow you to control your surroundings. This becomes especially true if what you want is:</p>
@@ -187,43 +207,45 @@ I love that in the course of my work I get the opportunity to be exposed to a lo
 <p>Ah yes... I knew we had a plan here.</p>
 <h2>Submodules</h2>
 <p>The answer here is to leverage the submodule capabilities in git. By including a repository as a submodule within a host repository, the host will consider the submodule to be of its own. By pulling and committing updates recursively and in the right order, you can keep the host documentation in sync. The benefit of all of this when it comes to Sphinx is that you would have one master documentation resource with a singular table of contents tree and the user will stay within that single construct. Sort of like this...</p>
-<p><center></p>
-<p><img alt="Submodule" src="http://www.brokenlyre.com/media/submodule.png"></p>
-<p></center></p>
-<p>Now getting to that point where you have your independent and collective documentation set takes just a little git patience. My patience was initially shored up with a quick read of <a href="http://fmarco76.github.io/git%20and%20related%20services/readthedocs/">an article by Marco Fargetta</a>. I'd recommend you give it a quick read as well. First, be sure that your documents are as current as can be, committed and pushed. Now head into the root of your host repo (local) and run the following to get the child repo inducted:</p>
-<div class="highlight"><pre><span></span>$ git submodule add https://github.com/username/repository.git
-</pre></div>
+<center>
 
+![Submodule](http://www.polymathist.me/media/submodule.png)
+
+</center>
+
+<p>Now getting to that point where you have your independent and collective documentation set takes just a little git patience. My patience was initially shored up with a quick read of <a href="http://fmarco76.github.io/git%20and%20related%20services/readthedocs/">an article by Marco Fargetta</a>. I'd recommend you give it a quick read as well. First, be sure that your documents are as current as can be, committed and pushed. Now head into the root of your host repo (local) and run the following to get the child repo inducted:</p>
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>add<span class="w"> </span>https://github.com/username/repository.git
+</code></pre></div>
 
 <p>That should create a folder for the repository and bring in all of the appropriate files. Now you need to head to your index page and add some entries into the TOC tree to the new content. Something simple like:</p>
-<div class="highlight"><pre><span></span><span class="gh">My Documents</span>
+<div class="highlight"><pre><span></span><code><span class="gh">My Documents</span>
 <span class="gh">============</span>
 
 <span class="p">..</span> <span class="ow">toctree</span><span class="p">::</span>
-<span class="nc">:maxdepth:</span> <span class="nf">2</span>
-<span class="nc">:caption:</span> <span class="nf">Contents:</span>
+<span class="nc">:maxdepth:</span> 2
+<span class="nc">:caption:</span> Contents:
 
 pre-existing links
 submodulerepofolder/index
-</pre></div>
-
+</code></pre></div>
 
 <p>When you <code>make html</code> for this new construct, the submodule will now be included in your host documentation. And if you've been following along and setting reference anchors and using those as opposed to links, then all of the links between sections of your documentation will be dancing along just nicely.</p>
 <p>Now let's have a moment of sober honesty. Mucking around with submodules can be a hassle and becoming fully familiar with the various options of the <code>git submodule</code> is recommended. To that end, a thorough couple of reads through <a href="https://git-scm.com/book/en/v2/Git-Tools-Submodules">this documentation on Submodules</a> should just begin to produce that familiarity. A couple of specific takeaways for me include:</p>
-<div class="highlight"><pre><span></span>$ git clone --recurse-submodules https://github.com/username/repository.git
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>clone<span class="w"> </span>--recurse-submodules<span class="w"> </span>https://github.com/username/repository.git
+</code></pre></div>
 
 <p>... which will grab an entire repository along with the submodules <strong>and their contents</strong>. Trust me. It's important.</p>
 <p>Additionally...</p>
-<div class="highlight"><pre><span></span>$ git submodule update --remote --recursive
-</pre></div>
-
+<div class="highlight"><pre><span></span><code>$<span class="w"> </span>git<span class="w"> </span>submodule<span class="w"> </span>update<span class="w"> </span>--remote<span class="w"> </span>--recursive
+</code></pre></div>
 
 <p>... is an important tool to get your local repository updated through all of the submodule layers. Did I say layers? <strong>YES</strong>! In our use case, we have the need for nested submodules and keeping everything organized takes a bit of work but the results are exactly what we needed. It sort of looks something like this:</p>
-<p><center></p>
-<p><img alt="Our Use Case" src="http://www.brokenlyre.com/media/ourusecase.png"></p>
-<p></center></p>
+<center>
+
+![Our Use Case](http://www.polymathist.me/media/ourusecase.png)
+
+</center>
+
 <h2>Breathe Out</h2>
 <p>So yeah. It's been quite a bit to run through both in real life and documenting it here to at least a surface level. I'm sure there are a lot of other options that could have been considered, but this seemed to meet the needs at the moment. Thanks for sticking with me on this ride. I look forward to seeing you on the next.</p>
 <p>Regards,<br>
@@ -273,37 +295,37 @@ Stuart</p>
       <a href="http://www.brokenlyre.com/tag/git.html">git</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/creating.html">creating</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/submodules.html">submodules</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/organizing.html">organizing</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/website.html">website</a>
+      <a href="http://www.brokenlyre.com/tag/process.html">process</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/developing.html">developing</a>
     </li>
     <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/pelican.html">pelican</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/process.html">process</a>
-    </li>
-    <li class="list-group-item tag-4">
-      <a href="http://www.brokenlyre.com/tag/gtd.html">gtd</a>
+      <a href="http://www.brokenlyre.com/tag/submodules.html">submodules</a>
     </li>
     <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/sphinx.html">sphinx</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/pelican.html">pelican</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/approach.html">approach</a>
     </li>
     <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/organizing.html">organizing</a>
+    </li>
+    <li class="list-group-item tag-4">
       <a href="http://www.brokenlyre.com/tag/intersphinx.html">intersphinx</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/website.html">website</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/gtd.html">gtd</a>
+    </li>
+    <li class="list-group-item tag-4">
+      <a href="http://www.brokenlyre.com/tag/creating.html">creating</a>
     </li>
   </ul>
 </li>
@@ -357,23 +379,6 @@ Stuart</p>
 <script src="http://www.brokenlyre.com/theme/js/respond.min.js"></script>
 
 
-    <!-- Google Analytics -->
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-10053168-4']);
-        _gaq.push(['_trackPageview']);
-
-        (function () {
-            var ga = document.createElement('script');
-            ga.type = 'text/javascript';
-            ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(ga, s);
-        })();
-    </script>
-    <!-- End Google Analytics Code -->
 
 
 </body>
